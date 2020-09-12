@@ -1,0 +1,9 @@
+.SidebarWidget {
+    display: flex;
+    align-items: center;
+    margin: .1rem 0;
+    padding-left: 1rem;
+    color: rgb(83, 82, 82);
+    /* background-color: red; */
+}
+

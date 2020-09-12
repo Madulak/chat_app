@@ -7,6 +7,8 @@ exports.postSignup = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
+  console.log(req.body);
+
   try {
     const userDoc = await User.findOne({email: email});
     if(userDoc) {
@@ -26,7 +28,7 @@ exports.postSignup = async (req, res, next) => {
 }
 
 exports.postLogin = async (req, res, next) => {
-  const email = req.body.email,
+  const email = req.body.email;
   const password = req.body.password;
 
   try {
@@ -39,8 +41,9 @@ exports.postLogin = async (req, res, next) => {
       console.log('Wrong Password');
     }
     console.log('Logged In');
+    console.log(userDoc);
     const token = jwt.sign({
-      userId : userDoc.user._id.toString(),
+      userId : userDoc._id.toString(),
       username: userDoc.username,
     }, 'somesupersecretsecret', { expiresIn : '1h'})
     res.status(200).json({token: token, username: userDoc.username, userId: userDoc._id.toString()})

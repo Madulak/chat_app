@@ -1,0 +1,15 @@
+.Sidebar {
+    position: fixed;
+    width: 100%;
+    /* padding: 0rem 1rem; */
+    /* background-color: gray; */
+}
+
+.Link {
+    color: red;
+}
+
+/* .Sidebar * {
+    margin: 0;
+    padding: 0;
+} */

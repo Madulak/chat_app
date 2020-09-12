@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+}
+
+.Container {
+    width: 100%;
+}
+
+.Toolbar {
+    position: fixed;
+    top: 0;
+    height: 4rem;
+    width: 100%;
+    z-index: 900;
+}
+
+.ContentContainer {
+    margin-top: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    
+}
+
+.Sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    height: 92vh;
+    position: fixed;
+    width: 20%;
+    /* background-color: rgb(233, 233, 233); */
+    /* margin-top: 0.7rem; */
+}
+
+.Content {
+    flex: 3;
+    margin-left: 20%;
+    /* background-color: rgb(238, 238, 238); */
+    width: 60%; 
+    position: absolute;
+    /* flex-wrap: wrap; */
+}
+
+.Explore {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    height: 92vh;
+    position: fixed;
+    width: 20%;
+    background-color: gray;
+    /* margin-top: 0.1rem; */
+    left: 80%
+}
