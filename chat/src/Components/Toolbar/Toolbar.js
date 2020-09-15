@@ -3,7 +3,6 @@ import classes from './Toolbar.module.css';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const toolbar = React.memo((props) => {
