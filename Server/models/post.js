@@ -10,7 +10,7 @@ const postSchema = new Schema({
   },
   postCreator: {
     type: Schema.Types.ObjectId,
-  }
+  },
   like: [{
     type: Schema.Types.ObjectId,
   }]
