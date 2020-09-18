@@ -36,10 +36,11 @@ body {
 .Content {
     flex: 3;
     margin-left: 20%;
-    /* background-color: rgb(238, 238, 238); */
+    background-color: rgba(224, 223, 223, 0.507);
     width: 60%; 
     position: absolute;
     /* flex-wrap: wrap; */
+    min-height: 100vh;
 }
 
 .Explore {
@@ -49,7 +50,7 @@ body {
     height: 92vh;
     position: fixed;
     width: 20%;
-    background-color: gray;
+    background-color: rgba(224, 223, 223, 0.507);
     /* margin-top: 0.1rem; */
     left: 80%
 }

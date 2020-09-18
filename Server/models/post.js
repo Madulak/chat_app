@@ -10,10 +10,17 @@ const postSchema = new Schema({
   },
   postCreator: {
     type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  type: {
+    type: String,
   },
   like: [{
     type: Schema.Types.ObjectId,
-  }]
+  }],
+  comment: [{
+    type: Schema.Types.ObjectId,
+  }],
 }, {timestamps: true})
 
 module.exports = mongoose.model('Post', postSchema);

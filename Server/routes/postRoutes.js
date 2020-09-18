@@ -6,4 +6,8 @@ const posts = require('../controllers/posts');
 
 router.post('/createpost', isAuth, posts.createPost);
 
+router.get('/posts', posts.getFindAllPosts);
+
+router.post('/like/:id',  posts.postLike);
+
 module.exports = router;

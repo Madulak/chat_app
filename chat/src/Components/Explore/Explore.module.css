@@ -1,4 +1,5 @@
 .Explore {
-   
    position: fixed;
+   width: 19%;
+   box-sizing: border-box;
 }

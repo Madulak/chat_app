@@ -1,0 +1,8 @@
+.ReactionWidget {
+    display: flex;
+    align-items: center;
+}
+
+.ReactionWidget p {
+    margin-left: .5rem;
+}
