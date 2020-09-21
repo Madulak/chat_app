@@ -1,6 +1,7 @@
 const Post = require('../models/post');
 const User = require('../models/user');
 const Comment = require('../models/comment');
+const Like = require('../models/like');
 
 exports.createPost = async (req, res, next) => {
   const postText = req.body.postText;
@@ -35,6 +36,7 @@ exports.getFindAllPosts = async (req, res, next) => {
   try {
     const postDoc = await Post.find()
       .populate('postCreator')
+      .populate('like')
       .sort({createdAt: -1})
     res.status(200).json({ data: postDoc});
   } catch (error) {
@@ -90,16 +92,77 @@ exports.postLike = async (req, res, next) => {
   console.log('Post Id');
   console.log(postId);
   console.log(req.body)
+  console.log(userId);
 
-  // try {
-  //   const userDoc = await User.findById(userId);
-  //   if (!userDoc) {
-  //     console.log('No user Found!');
-  //   }
-  //   const postDoc = await Post.findById(postId);
-  //   // const findLike = await Post.find({postDoc.like: userDoc._id})
-  //
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  let newLike;
+
+  try {
+    const userDoc = await User.findById(userId);
+    if (!userDoc) {
+      console.log('No user Found!');
+    }
+    const postDoc = await Post.findById(postId)
+      .populate('like')
+
+      console.log('Post  ',postDoc.like);
+      console.log('UserId ', userDoc._id);
+      const array = postDoc.like.find((item) => item.likeCreator == userId);
+      console.log('Filtered ',array);
+
+      // array === undefined ?
+      // :
+
+
+
+    if(array === undefined ){
+    newLike = new Like({
+      likeCreator: userId,
+    })
+    const results = await newLike.save();
+    console.log('RESULTS ',results);
+    postDoc.like.push(newLike);
+    await postDoc.save();
+    console.log('Post Doc ', postDoc);
+  } else  {
+      console.log('ArrayId ',array._id);
+      const findLike = await Like.findByIdAndRemove(array._id);
+      console.log('Find By Id ', findLike);
+      const removeLike = postDoc.like.filter(el => el.likeCreator != userId);
+      postDoc.like = removeLike;
+      console.log('Remove Like ', removeLike);
+      const results = await postDoc.save();
+      console.log('Results ', results);
+    }
+
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.getPhotos = async (req, res, next) => {
+
+  try {
+    const postDoc = await Post.find()
+      .populate('postCreator')
+      .sort({createdAt: -1})
+    const photos = postDoc.filter(el => el.type.startsWith('image'));
+    console.log(array);
+    res.status(200).json({data: photos})
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.getVideos = async (req, res, next) => {
+
+  try {
+    const postDoc = await Post.find()
+      .populate('postCreator')
+      .sort({createdAt: -1})
+    const videos = postDoc.filter(el => el.type.startsWith('video'));
+    res.status(200).json({data: videos})
+  } catch (error) {
+    console.log(error);
+  }
 }

@@ -45,8 +45,7 @@ const feed = React.memo(() => {
                     
                     </div>
                 ))}
-                
-                
+                               
             </div>
         </Container>
     );

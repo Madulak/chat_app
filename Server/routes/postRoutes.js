@@ -8,6 +8,10 @@ router.post('/createpost', isAuth, posts.createPost);
 
 router.get('/posts', posts.getFindAllPosts);
 
-router.post('/like/:id',  posts.postLike);
+router.get('/photos', posts.getPhotos);
+
+router.get('/videos', posts.getVideos);
+
+router.post('/like/:id', isAuth, posts.postLike);
 
 module.exports = router;
