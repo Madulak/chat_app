@@ -3,7 +3,7 @@ import classes from './PostImage.module.css';
 
 import ReactionWidget from '../UI/ReactionWidget/ReactionWidget';
 
-import FavoriteIcon from '@material-ui/icons/Favorite';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import TurnedInNotOutlinedIcon from '@material-ui/icons/TurnedInNotOutlined';

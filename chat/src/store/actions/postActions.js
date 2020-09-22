@@ -37,11 +37,10 @@ export const get_all_posts = () => {
         try {
             response = await Axios.get(urlGetAllPosts);
             console.log(response);
+            dispatch({ type: GET_ALL_POSTS, posts: response.data.data })
         } catch (error) {
             console.log(error);
-        }
-
-        dispatch({ type: GET_ALL_POSTS, posts: response.data.data })
+        } 
     }
 }
 
@@ -53,7 +52,6 @@ export const post_like = (postId) => {
                 Authorization: 'Bearer '+token
             }
         }
-        // const userId = getState().auth.userId;
         let response;
         try {
             response = await Axios.post(urlPostLike+postId,{hello: 'hello'} ,config);
@@ -61,7 +59,6 @@ export const post_like = (postId) => {
         } catch (error) {
             console.log(error);
         }
-
         dispatch({type: POST_LIKE})
     }
 }

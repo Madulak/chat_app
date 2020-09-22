@@ -13,6 +13,8 @@ exports.postSignup = async (req, res, next) => {
     const userDoc = await User.findOne({email: email});
     if(userDoc) {
       console.log('User Exist');
+      const error = new Error('User Exist');
+      error.statusCode = 401;
     }
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = new User({
@@ -34,11 +36,16 @@ exports.postLogin = async (req, res, next) => {
   try {
     const userDoc = await User.findOne({email: email});
     if (!userDoc) {
-      console.log('User Exist');
+      const error = new Error('User Does not Exist');
+      error.statusCode = 401;
+      throw error;
     }
     const checkPassword = await bcrypt.compare(password, userDoc.password);
     if(!checkPassword) {
       console.log('Wrong Password');
+      const error = new Error('Wrong password Try Again');
+      // error.statusCode = 401;
+      throw error;
     }
     console.log('Logged In');
     console.log(userDoc);
@@ -48,7 +55,10 @@ exports.postLogin = async (req, res, next) => {
     }, 'somesupersecretsecret', { expiresIn : '1h'})
     res.status(200).json({token: token, username: userDoc.username, userId: userDoc._id.toString()})
   } catch (e) {
-    console.log(e);
+    console.log('This is Error ',e);
+    const err = new Error(e);
+    res.status(401).json({message : err, data: 'User Does Not Exist'});
+    next(err);
   }
 
 }

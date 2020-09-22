@@ -1,4 +1,3 @@
-import { GET_ALL_POSTS } from "./postActions";
 import Axios from 'axios';
 
 export const GET_ALL_USERS = 'GET_ALL_USERS';
@@ -14,6 +13,7 @@ export const get_all_users = () => {
             console.log(response);
         } catch (error) {
             console.log(error);
+            throw error
         }
 
         dispatch({ type : GET_ALL_USERS, users: response.data.data })

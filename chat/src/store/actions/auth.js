@@ -27,10 +27,11 @@ export const login = (loginData) => {
         try {
             response = await Axios.post(urlLogin, loginData);
             console.log(response.data);
+            dispatch({ type: LOGIN, token: response.data.token, userId: response.data.userId, username: response.data.username })
         } catch (error) {
             console.log(error);
+            throw error;
         }
 
-        dispatch({ type: LOGIN, token: response.data.token, userId: response.data.userId, username: response.data.username })
     }
 }

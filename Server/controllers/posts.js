@@ -9,8 +9,6 @@ exports.createPost = async (req, res, next) => {
   const userId = req.userId;
   const fileType = req.file.mimetype;
 
-  console.log(req.file);
-
   try {
     let newPost;
     const userDoc = await User.findById(userId);
@@ -43,7 +41,6 @@ exports.getFindAllPosts = async (req, res, next) => {
     console.log(error);
   }
 }
-
 
 exports.postDeletepost = async (req, res, next) => {
   const postId = req.params.id;
@@ -109,11 +106,6 @@ exports.postLike = async (req, res, next) => {
       const array = postDoc.like.find((item) => item.likeCreator == userId);
       console.log('Filtered ',array);
 
-      // array === undefined ?
-      // :
-
-
-
     if(array === undefined ){
     newLike = new Like({
       likeCreator: userId,
@@ -133,7 +125,6 @@ exports.postLike = async (req, res, next) => {
       const results = await postDoc.save();
       console.log('Results ', results);
     }
-
 
   } catch (error) {
     console.log(error);

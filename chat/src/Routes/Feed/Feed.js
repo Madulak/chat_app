@@ -20,12 +20,11 @@ const feed = React.memo(() => {
 
     const createPost = useCallback((data) => {
         dispatch(postActions.create_post(data));
-    })
+    }, [dispatch])
 
     const postLike = useCallback((postId) => {
-         
         like(postActions.post_like(postId));
-    },[])
+    },[like])
 
     useEffect(() => {
         dispatch(postActions.get_all_posts())

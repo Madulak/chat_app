@@ -3,26 +3,23 @@ import classes from './Post.module.css';
 
 import ReactionWidget from '../UI/ReactionWidget/ReactionWidget';
 
-import FavoriteIcon from '@material-ui/icons/Favorite';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import TurnedInNotOutlinedIcon from '@material-ui/icons/TurnedInNotOutlined';
 
-import { Media, Player, controls } from 'react-media-player';
-const {
-    PlayPause,
-    CurrentTime,
-    SeekBar,
-    Duration,
-    MuteUnmute,
-    Volume,
-    Fullscreen,
-  } = controls
+// import { useSelector } from 'react-redux';
+import VideoPlayer from 'react-video-js-player';
 
+const post = React.memo((props) => {
 
+    // const userId = useSelector(state => state.auth.userId);
+    // const like = useSelector(state => state.posts.posts);
+    // console.log(like)
 
-
-const post = (props) => {
+    // const likeHandler = () => {
+    //     const isLike = like.like.find(el => el.likeCreator === userId)
+    // }
 
     return (
         <div className={classes.Post}>
@@ -34,23 +31,7 @@ const post = (props) => {
                 </div>
             </div>
             <p>{props.postText}</p>
-             <Media>
-                <div className={classes.Media}>
-                    <div className={classes.MediaPlayer}>
-                        <Player className={classes.Player} src={props.mediaUrl} />
-                        
-                    </div>
-                    <div className={classes.MediaControls}>
-                        <PlayPause  />
-                        <CurrentTime className={classes.CurrentTime} />
-                        <SeekBar className={classes.SeekBar}/>
-                        <Duration className={classes.Duration} />
-                        {/* <MuteUnmute />
-                        <Volume />
-                        <Fullscreen /> */}
-                    </div>
-                </div>
-            </Media>
+             <VideoPlayer className={classes.Media} src={props.mediaUrl} />
             <div className={classes.Reactions}>
                 <ReactionWidget Widgetname={'Comment'} Widget={<MessageOutlinedIcon />} />
                 <div onClick={() => props.postLike(props.postId)}>
@@ -61,6 +42,6 @@ const post = (props) => {
             </div>
         </div>
     );
-}
+})
 
-export default post
+export default post;
