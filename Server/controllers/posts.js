@@ -31,11 +31,18 @@ exports.createPost = async (req, res, next) => {
 
 exports.getFindAllPosts = async (req, res, next) => {
 
+  const userId = req.params.id;
+  let like;
   try {
     const postDoc = await Post.find()
       .populate('postCreator')
       .populate('like')
       .sort({createdAt: -1})
+
+    postDoc.forEach(el => {
+       like = postDoc.find(element => element.like.likeCreator === userId)
+      console.log(like)
+    })
     res.status(200).json({ data: postDoc});
   } catch (error) {
     console.log(error);
