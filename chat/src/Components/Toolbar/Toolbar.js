@@ -1,21 +1,21 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import classes from './Toolbar.module.css';
 
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import * as authActions from '../../store/actions/auth';
+import { useDispatch } from 'react-redux';
 
 const toolbar = React.memo((props) => {
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const loginState = useSelector(state => state.auth.userId);
+    const userState = useSelector(state => state.auth.username);
 
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+    const dispatch = useDispatch();
+
+    const logout_handler = () => {
+        dispatch(authActions.logout());
+    }
 
     return (
         <div className={classes.Toolbar}>
@@ -27,20 +27,19 @@ const toolbar = React.memo((props) => {
             </div>
             <div >
                 <div>
-                    <div onClick={handleClick}>
-                        <AccountCircleIcon />
-                    </div>
-                    <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                    >
-                        <MenuItem onClick={props.signup}>Signup</MenuItem>
-                        <MenuItem onClick={props.login}>Login</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
-                    </Menu>
+                    {loginState ? <div className={classes.User}>
+                                        <NavLink onClick={() => logout_handler()} to='/logout'>Logout</NavLink>
+                                        <div className={classes.ImageContainer}>
+                                            <img className={classes.UserImage} src={props.imgUrl} alt={userState.charAt(0)} />
+                                        </div>
+                                    </div> 
+                            
+                            :
+                        <div>
+                            <NavLink onClick={props.login} to='/login'>Login</NavLink>
+                            <NavLink onClick={props.signup} to='/signup'>Signup</NavLink>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

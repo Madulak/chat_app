@@ -145,7 +145,7 @@ exports.getPhotos = async (req, res, next) => {
       .populate('postCreator')
       .sort({createdAt: -1})
     const photos = postDoc.filter(el => el.type.startsWith('image'));
-    console.log(array);
+    // console.log(array);
     res.status(200).json({data: photos})
   } catch (error) {
     console.log(error);

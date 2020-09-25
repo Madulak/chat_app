@@ -1,7 +1,9 @@
-const { GET_ALL_POSTS } = require("../actions/postActions")
+const { GET_ALL_POSTS, GET_PHOTOS, GET_VIDEOS } = require("../actions/postActions")
 
 const initialState = {
-    posts: []
+    posts: [],
+    photos: [],
+    videos: [],
 }
 
 const postReducer = (state = initialState, action) => {
@@ -11,6 +13,16 @@ const postReducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: action.posts
+            }
+        case GET_PHOTOS: 
+            return {
+                ...state,
+                photos: action.photos,
+            }
+        case GET_VIDEOS:
+            return {
+                ...state,
+                videos: action.videos,
             }
         
         default: 

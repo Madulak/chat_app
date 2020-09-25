@@ -7,3 +7,22 @@
     border-bottom: 1px solid gray;
     height: 100%;
 }
+
+.Toolbar .User {
+    display: flex;
+    align-items: center;
+}
+
+.Toolbar .ImageContainer {
+    margin: 0 .5rem;
+}
+
+.Toolbar .UserImage {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightcoral;
+    border-radius: 50%;
+}

@@ -3,7 +3,7 @@ import classes from './Post.module.css';
 
 import ReactionWidget from '../UI/ReactionWidget/ReactionWidget';
 
-// import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import TurnedInNotOutlinedIcon from '@material-ui/icons/TurnedInNotOutlined';
@@ -20,6 +20,7 @@ const post = React.memo((props) => {
     // const likeHandler = () => {
     //     const isLike = like.like.find(el => el.likeCreator === userId)
     // }
+    console.log(props.like)
 
     return (
         <div className={classes.Post}>
@@ -34,10 +35,13 @@ const post = React.memo((props) => {
              <VideoPlayer className={classes.Media} src={props.mediaUrl} />
             <div className={classes.Reactions}>
                 <ReactionWidget Widgetname={'Comment'} Widget={<MessageOutlinedIcon />} />
-                <div onClick={() => props.postLike(props.postId)}>
+                
+                {props.like === false ?<div onClick={() => props.postLike(props.postId)}>
                     <ReactionWidget  Widgetname={'Likes'} Widget={<FavoriteBorderIcon  />} />
-                </div>
-                {/* <ReactionWidget Widgetname={'Likes'} Widget={<FavoriteIcon />} /> */}
+                </div> : 
+                    <ReactionWidget Widgetname={'Likes'} Widget={<FavoriteIcon />} />
+                }
+                
                 <ReactionWidget Widgetname={'Saved'} Widget={<TurnedInNotOutlinedIcon />} />
             </div>
         </div>
